@@ -106,6 +106,7 @@
     // Pass the managed object context to the root view controller.
     self.rootViewController.managedObjectContext = self.managedObjectContext; 
 }
+
 - (void)saveContext
 {
     NSError *error = nil;
