@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#define BOX_DRAFTS 0
+#define BOX_OUTBOX 1
+#define BOX_SENT   2
+#define BOX_TRASH  3
+
 @class RootViewController;
 
 @class DetailViewController;
@@ -21,6 +26,8 @@
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, retain) NSDictionary *uiInfo;
+@property (nonatomic, readonly) NSArray* boxes;
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;

@@ -7,9 +7,7 @@
 //
 
 #import "KDClientAppDelegate.h"
-
 #import "RootViewController.h"
-
 #import "DetailViewController.h"
 
 @implementation KDClientAppDelegate
@@ -29,9 +27,23 @@
 
 @synthesize detailViewController=_detailViewController;
 
+@synthesize uiInfo=_uiInfo;
+
+@synthesize boxes;
+
+- (NSArray *) boxes {
+    NSArray *result = [self.uiInfo objectForKey:@"boxes"];
+    return result;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    
+    NSString *path = [[NSBundle mainBundle] bundlePath];
+    NSString *finalPath = [path stringByAppendingPathComponent:@"ui.plist"];
+    self.uiInfo = [NSDictionary dictionaryWithContentsOfFile:finalPath];
+    
     // Add the split view controller's view to the window and display.
     self.window.rootViewController = self.splitViewController;
     [self.window makeKeyAndVisible];
@@ -83,6 +95,7 @@
     [_splitViewController release];
     [_rootViewController release];
     [_detailViewController release];
+    [_uiInfo release];
     [super dealloc];
 }
 
