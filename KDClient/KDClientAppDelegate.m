@@ -29,8 +29,6 @@
 
 @synthesize uiInfo=_uiInfo;
 
-@synthesize boxes;
-
 - (NSDictionary *) uiInfo {
     if (_uiInfo == nil) {
         NSString *path = [[NSBundle mainBundle] bundlePath];
