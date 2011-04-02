@@ -21,7 +21,8 @@
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSOperationQueue *queue;
 
-- (void)insertNewObject:(id)sender;
+- (void)sendOutboxReports:(NSArray *)reports;
 
 @end

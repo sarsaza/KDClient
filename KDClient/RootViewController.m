@@ -7,8 +7,10 @@
 //
 
 #import "RootViewController.h"
-
 #import "DetailViewController.h"
+#import "ReportPostRequest.h"
+#import "JSONKit.h"
+#import "NSManagedObject+BeeExtensions.h"
 
 @interface RootViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -21,6 +23,25 @@
 @synthesize fetchedResultsController;
 
 @synthesize managedObjectContext;
+
+@synthesize queue = _queue;
+
+- (void)sendOutboxReports:(NSArray *)reports {
+    NSLog(@"rootViewController.sendOutboxReports");
+    if (![self queue]) {
+        [self setQueue:[[[NSOperationQueue alloc] init] autorelease]];
+    }
+
+    for (NSManagedObject *report in reports) {
+        NSURL *url = [NSURL URLWithString:@"http://localhost:8080/ipad/resteasy/report"];
+        ReportPostRequest *request = [[ReportPostRequest alloc] initWithURL:url andReport:report];
+        [request setDelegate:self];
+        [request setDidFinishSelector:@selector(requestDone:)];
+        [request setDidFailSelector:@selector(requestWentWrong:)];
+        [self.queue addOperation:request];
+        NSLog(@"ReportJSON : %@", [[report propertiesDictionary] JSONString]);
+    }
+}
 
 - (void)viewDidLoad
 {
