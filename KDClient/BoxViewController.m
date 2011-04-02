@@ -26,7 +26,7 @@
 }
 
 - (id)initWithStatus:(NSUInteger)aStatus {
-    if ((self = [super initWithNibName:@"BoxViewController" bundle:nil])) {
+    if ((self = [super initWithNibName:@"BoxView" bundle:nil])) {
         NSUInteger count = [self.app.boxes count];
         if (aStatus >= count) {
             [NSException raise:@"WrongStatusException" format:@"status is invalid: %i", aStatus]; 

@@ -46,6 +46,11 @@
 		BB2FBBD513465330001B33CA /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2FBBD413465330001B33CA /* libz.1.2.3.dylib */; };
 		BB2FBBE2134712A1001B33CA /* ReportPostRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2FBBE1134712A1001B33CA /* ReportPostRequest.m */; };
 		BB2FBBE5134712EF001B33CA /* BoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2FBBE4134712EF001B33CA /* BoxViewController.m */; };
+		BB6CDE7C13473B5500E6DEC4 /* ui.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB6CDE7B13473B5500E6DEC4 /* ui.plist */; };
+		BB6CDE801347404000E6DEC4 /* BoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB6CDE7F1347404000E6DEC4 /* BoxView.xib */; };
+		BB6CDE831347485E00E6DEC4 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6CDE821347485E00E6DEC4 /* DetailTableViewController.m */; };
+		BB6CDE871347546200E6DEC4 /* EditingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6CDE861347546200E6DEC4 /* EditingCell.m */; };
+		BB6CDE8A1347547000E6DEC4 /* SelectOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6CDE891347547000E6DEC4 /* SelectOneCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +128,14 @@
 		BB2FBBE1134712A1001B33CA /* ReportPostRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportPostRequest.m; sourceTree = "<group>"; };
 		BB2FBBE3134712EF001B33CA /* BoxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoxViewController.h; sourceTree = "<group>"; };
 		BB2FBBE4134712EF001B33CA /* BoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxViewController.m; sourceTree = "<group>"; };
+		BB6CDE7B13473B5500E6DEC4 /* ui.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ui.plist; sourceTree = "<group>"; };
+		BB6CDE7F1347404000E6DEC4 /* BoxView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoxView.xib; sourceTree = "<group>"; };
+		BB6CDE811347485D00E6DEC4 /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
+		BB6CDE821347485E00E6DEC4 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
+		BB6CDE851347546200E6DEC4 /* EditingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = EditingCell.h; sourceTree = "<group>"; };
+		BB6CDE861347546200E6DEC4 /* EditingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditingCell.m; sourceTree = "<group>"; };
+		BB6CDE881347547000E6DEC4 /* SelectOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectOneCell.h; sourceTree = "<group>"; };
+		BB6CDE891347547000E6DEC4 /* SelectOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectOneCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,15 +205,16 @@
 		BB2FBB5F13464E45001B33CA /* KDClient */ = {
 			isa = PBXGroup;
 			children = (
+				BB6CDE84134753EA00E6DEC4 /* Table Cells */,
+				BB6CDE7E1347400700E6DEC4 /* UserInterface */,
 				BB2FBBC713464F68001B33CA /* ViewControllers */,
 				BB2FBB9913464E7E001B33CA /* ASIHttpRequest */,
 				BB2FBBB913464ECA001B33CA /* Extensions */,
 				BB2FBBC313464F24001B33CA /* JSONKit */,
 				BB2FBB6813464E45001B33CA /* KDClientAppDelegate.h */,
 				BB2FBB6913464E45001B33CA /* KDClientAppDelegate.m */,
-				BB2FBB6E13464E45001B33CA /* MainWindow.xib */,
-				BB2FBB7413464E45001B33CA /* DetailView.xib */,
 				BB2FBB6B13464E45001B33CA /* KDClient.xcdatamodeld */,
+				BB6CDE7B13473B5500E6DEC4 /* ui.plist */,
 				BB2FBB6013464E45001B33CA /* Supporting Files */,
 			);
 			path = KDClient;
@@ -297,12 +311,35 @@
 				BB2FBBE4134712EF001B33CA /* BoxViewController.m */,
 				BB2FBB7113464E45001B33CA /* DetailViewController.h */,
 				BB2FBB7213464E45001B33CA /* DetailViewController.m */,
+				BB6CDE811347485D00E6DEC4 /* DetailTableViewController.h */,
+				BB6CDE821347485E00E6DEC4 /* DetailTableViewController.m */,
 				BB2FBB7713464E45001B33CA /* RootViewController.h */,
 				BB2FBB7813464E46001B33CA /* RootViewController.m */,
 				BB2FBBCB13464FFD001B33CA /* SelectOneController.h */,
 				BB2FBBCC13464FFD001B33CA /* SelectOneController.m */,
 			);
 			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		BB6CDE7E1347400700E6DEC4 /* UserInterface */ = {
+			isa = PBXGroup;
+			children = (
+				BB2FBB7413464E45001B33CA /* DetailView.xib */,
+				BB2FBB6E13464E45001B33CA /* MainWindow.xib */,
+				BB6CDE7F1347404000E6DEC4 /* BoxView.xib */,
+			);
+			name = UserInterface;
+			sourceTree = "<group>";
+		};
+		BB6CDE84134753EA00E6DEC4 /* Table Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BB6CDE881347547000E6DEC4 /* SelectOneCell.h */,
+				BB6CDE891347547000E6DEC4 /* SelectOneCell.m */,
+				BB6CDE851347546200E6DEC4 /* EditingCell.h */,
+				BB6CDE861347546200E6DEC4 /* EditingCell.m */,
+			);
+			name = "Table Cells";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -378,6 +415,8 @@
 				BB2FBB6413464E45001B33CA /* InfoPlist.strings in Resources */,
 				BB2FBB7013464E45001B33CA /* MainWindow.xib in Resources */,
 				BB2FBB7613464E45001B33CA /* DetailView.xib in Resources */,
+				BB6CDE7C13473B5500E6DEC4 /* ui.plist in Resources */,
+				BB6CDE801347404000E6DEC4 /* BoxView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +473,9 @@
 				BB2FBBCD13464FFD001B33CA /* SelectOneController.m in Sources */,
 				BB2FBBE2134712A1001B33CA /* ReportPostRequest.m in Sources */,
 				BB2FBBE5134712EF001B33CA /* BoxViewController.m in Sources */,
+				BB6CDE831347485E00E6DEC4 /* DetailTableViewController.m in Sources */,
+				BB6CDE871347546200E6DEC4 /* EditingCell.m in Sources */,
+				BB6CDE8A1347547000E6DEC4 /* SelectOneCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -620,6 +662,7 @@
 				BB2FBB9513464E46001B33CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BB2FBB9613464E46001B33CA /* Build configuration list for PBXNativeTarget "KDClientTests" */ = {
 			isa = XCConfigurationList;
@@ -628,6 +671,7 @@
 				BB2FBB9813464E46001B33CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

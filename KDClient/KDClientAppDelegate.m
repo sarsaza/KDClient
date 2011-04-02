@@ -29,11 +29,13 @@
 
 @synthesize uiInfo=_uiInfo;
 
+@synthesize boxes;
+
 - (NSDictionary *) uiInfo {
     if (_uiInfo == nil) {
         NSString *path = [[NSBundle mainBundle] bundlePath];
         NSString *finalPath = [path stringByAppendingPathComponent:@"ui.plist"];
-        _uiInfo = [NSDictionary dictionaryWithContentsOfFile:finalPath];
+        _uiInfo = [[NSDictionary dictionaryWithContentsOfFile:finalPath] retain];
     }
     return _uiInfo;
 }

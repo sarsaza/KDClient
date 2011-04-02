@@ -7,8 +7,10 @@
 //
 
 #import "DetailViewController.h"
-
 #import "RootViewController.h"
+#import "DetailTableViewController.h"
+#import "NSObject+BeeExtensions.h"
+#import "KDClientAppDelegate.h"
 
 @interface DetailViewController ()
 @property (nonatomic, retain) UIPopoverController *popoverController;
@@ -21,17 +23,18 @@
 
 @synthesize detailItem=_detailItem;
 
-@synthesize detailDescriptionLabel=_detailDescriptionLabel;
-
 @synthesize popoverController=_myPopoverController;
 
 @synthesize rootViewController=_rootViewController;
 
+@synthesize outboxBarItem=_outboxBarItem;
+@synthesize draftsBarItem=_draftsBarItem;
+@synthesize trashBarItem=_trashBarItem;
+
+@synthesize tableViewController=_tableViewController;
+
 #pragma mark - Managing the detail item
 
-/*
- When setting the detail item, update the view and dismiss the popover controller if it's showing.
- */
 - (void)setDetailItem:(NSManagedObject *)managedObject
 {
 	if (_detailItem != managedObject) {
@@ -49,10 +52,31 @@
 
 - (void)configureView
 {
-    // Update the user interface for the detail item.
-
-    // Normally should use accessor method, but using KVC here avoids adding a custom class to the template.
-    self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"timeStamp"] description];
+    int baseItems = 1; // only [spring]
+    if (UIDeviceOrientationIsPortrait(self.interfaceOrientation)) {
+        baseItems = 2; // [reports] + [spring]
+    }
+    
+    NSMutableArray *items = [[[self.toolbar items] subarrayWithRange:NSMakeRange(0, baseItems)] mutableCopy];
+    if (self.detailItem != nil) {
+        NSString *box = [self.detailItem valueForKey:@"box"];
+        if ([box isEqualToString:@"draft"]) {
+            [items addObject:self.trashBarItem];
+            [items addObject:self.outboxBarItem];
+        } else if ([box isEqualToString:@"outbox"]) {
+            [items addObject:self.trashBarItem];
+            [items addObject:self.draftsBarItem];
+        } else if ([box isEqualToString:@"sent"]) {
+            // TODO check status button
+        } else if ([box isEqualToString:@"trash"]) {
+            // TODO delete forever button
+        }
+    }
+    
+    [self.toolbar setItems:items animated:YES];
+    [items release];
+    
+    [self.tableViewController.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -133,8 +157,39 @@
     [_myPopoverController release];
     [_toolbar release];
     [_detailItem release];
-    [_detailDescriptionLabel release];
     [super dealloc];
+}
+
+#pragma mark -
+#pragma mark Toolbar items actions
+
+- (void) moveReport:(NSManagedObject *)report to:(NSString *)newBox  {
+    assert(![[report valueForKey: @"box"] isEqual: newBox]);
+    
+    [report setValue:newBox forKey:@"box"];
+    
+    [self.app saveContext];
+}
+
+- (IBAction)moveToDrafts:(id)sender {
+    [self moveReport:self.detailItem to:@"draft"];
+    
+    NSManagedObject *object = [self.detailItem retain];
+    [self setDetailItem:nil];
+    [self setDetailItem:object];
+    [object release];
+}
+
+- (IBAction)moveToOutbox:(id)sender {
+    [self moveReport:self.detailItem to:@"outbox"];
+    
+    [self setDetailItem:nil];
+}
+
+- (IBAction)moveToTrash:(id)sender {
+    [self moveReport:self.detailItem to:@"trash"];
+    
+    [self setDetailItem:nil];
 }
 
 @end

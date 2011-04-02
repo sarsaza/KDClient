@@ -11,6 +11,7 @@
 #import <CoreData/CoreData.h>
 
 @class RootViewController;
+@class DetailTableViewController;
 
 @interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
 
@@ -21,8 +22,16 @@
 
 @property (nonatomic, retain) NSManagedObject *detailItem;
 
-@property (nonatomic, retain) IBOutlet UILabel *detailDescriptionLabel;
-
 @property (nonatomic, assign) IBOutlet RootViewController *rootViewController;
+
+@property (nonatomic, retain) IBOutlet UIBarItem *outboxBarItem;
+@property (nonatomic, retain) IBOutlet UIBarItem *draftsBarItem;
+@property (nonatomic, retain) IBOutlet UIBarItem *trashBarItem;
+
+@property (nonatomic, retain) IBOutlet DetailTableViewController *tableViewController;
+
+- (IBAction)moveToDrafts:(id)sender;
+- (IBAction)moveToOutbox:(id)sender;
+- (IBAction)moveToTrash:(id)sender;
 
 @end
