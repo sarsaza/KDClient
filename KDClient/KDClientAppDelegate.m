@@ -31,18 +31,22 @@
 
 @synthesize boxes;
 
+- (NSDictionary *) uiInfo {
+    if (_uiInfo == nil) {
+        NSString *path = [[NSBundle mainBundle] bundlePath];
+        NSString *finalPath = [path stringByAppendingPathComponent:@"ui.plist"];
+        _uiInfo = [NSDictionary dictionaryWithContentsOfFile:finalPath];
+    }
+    return _uiInfo;
+}
+
 - (NSArray *) boxes {
-    NSArray *result = [self.uiInfo objectForKey:@"boxes"];
-    return result;
+    return [self.uiInfo objectForKey:@"boxes"];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    
-    NSString *path = [[NSBundle mainBundle] bundlePath];
-    NSString *finalPath = [path stringByAppendingPathComponent:@"ui.plist"];
-    self.uiInfo = [NSDictionary dictionaryWithContentsOfFile:finalPath];
     
     // Add the split view controller's view to the window and display.
     self.window.rootViewController = self.splitViewController;

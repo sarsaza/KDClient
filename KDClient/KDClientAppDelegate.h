@@ -26,7 +26,7 @@
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, retain) NSDictionary *uiInfo;
+@property (nonatomic, readonly) NSDictionary *uiInfo;
 @property (nonatomic, readonly) NSArray* boxes;
 
 - (void)saveContext;
