@@ -137,11 +137,4 @@
     [super dealloc];
 }
 
-#pragma mark - Object insertion
-
-- (IBAction)insertNewObject:(id)sender
-{
-	[self.rootViewController insertNewObject:sender];	
-}
-
 @end

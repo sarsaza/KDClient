@@ -25,6 +25,4 @@
 
 @property (nonatomic, assign) IBOutlet RootViewController *rootViewController;
 
-- (IBAction)insertNewObject:(id)sender;
-
 @end
