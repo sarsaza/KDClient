@@ -8,13 +8,15 @@
 
 #import "DetailViewController.h"
 #import "RootViewController.h"
-#import "DetailTableViewController.h"
 #import "NSObject+BeeExtensions.h"
 #import "KDClientAppDelegate.h"
+#import "EditingCell.h"
+#import "SelectOneCell.h"
 
 @interface DetailViewController ()
 @property (nonatomic, retain) UIPopoverController *popoverController;
 - (void)configureView;
+@property (nonatomic, copy) NSIndexPath *prevCellIndex;
 @end
 
 @implementation DetailViewController
@@ -32,6 +34,8 @@
 @synthesize trashBarItem=_trashBarItem;
 
 @synthesize tableViewController=_tableViewController;
+
+@synthesize prevCellIndex=_prevCellIndex;
 
 #pragma mark - Managing the detail item
 
@@ -52,20 +56,16 @@
 
 - (void)configureView
 {
-    int baseItems = 1; // only [spring]
-    if (UIDeviceOrientationIsPortrait(self.interfaceOrientation)) {
-        baseItems = 2; // [reports] + [spring]
-    }
-    
-    NSMutableArray *items = [[[self.toolbar items] subarrayWithRange:NSMakeRange(0, baseItems)] mutableCopy];
+    self.trashBarItem.enabled = NO;
     if (self.detailItem != nil) {
         NSString *box = [self.detailItem valueForKey:@"box"];
         if ([box isEqualToString:@"draft"]) {
-            [items addObject:self.trashBarItem];
-            [items addObject:self.outboxBarItem];
+            NSLog(@"asdf");
+            self.trashBarItem.enabled = YES;
+            [self.navigationItem setRightBarButtonItem:self.outboxBarItem animated:YES];
         } else if ([box isEqualToString:@"outbox"]) {
-            [items addObject:self.trashBarItem];
-            [items addObject:self.draftsBarItem];
+            self.trashBarItem.enabled = YES;
+            [self.navigationItem setRightBarButtonItem:self.draftsBarItem animated:YES];
         } else if ([box isEqualToString:@"sent"]) {
             // TODO check status button
         } else if ([box isEqualToString:@"trash"]) {
@@ -73,10 +73,7 @@
         }
     }
     
-    [self.toolbar setItems:items animated:YES];
-    [items release];
-    
-    [self.tableViewController.tableView reloadData];
+    [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -108,30 +105,28 @@
 - (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController: (UIPopoverController *)pc
 {
     barButtonItem.title = @"Events";
-    NSMutableArray *items = [[self.toolbar items] mutableCopy];
-    [items insertObject:barButtonItem atIndex:0];
-    [self.toolbar setItems:items animated:YES];
-    [items release];
+    [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
     self.popoverController = pc;
 }
 
 // Called when the view is shown again in the split view, invalidating the button and popover controller.
 - (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
-    NSMutableArray *items = [[self.toolbar items] mutableCopy];
-    [items removeObjectAtIndex:0];
-    [self.toolbar setItems:items animated:YES];
-    [items release];
+    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.popoverController = nil;
 }
 
 /*
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+ */
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.toolbar.frame = CGRectMake(0, 0, self.tableView.frame.size.width, 44);
+    self.toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:self.toolbar];
+    
 }
- */
 
 - (void)viewDidUnload
 {
@@ -190,6 +185,117 @@
     [self moveReport:self.detailItem to:@"trash"];
     
     [self setDetailItem:nil];
+}
+
+#pragma mark - Cell type support
+
+- (UITableViewCell *)tableView:(UITableView *)tableView plainCellWithInfo:(NSDictionary *)cellInfo indexPath:(NSIndexPath *)indexPath
+{
+    NSString *CellIdentifier = [NSString stringWithFormat: @"Cell-%i-%i", indexPath.section, indexPath.row];
+    NSString *label = [cellInfo objectForKey:@"label"];
+    NSString *sample = [cellInfo objectForKey:@"sample"];
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];    
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+	cell.textLabel.text = label;
+	cell.detailTextLabel.text = sample;
+	return cell;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView editingCellWithInfo:(NSDictionary *)cellInfo indexPath:(NSIndexPath *)indexPath
+{
+    NSString *CellIdentifier = [NSString stringWithFormat: @"Cell-%i-%i", indexPath.section, indexPath.row];
+    
+	EditingCell *cell = (EditingCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[EditingCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];    
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.detailViewController = self;
+    }
+    
+    NSString *label = [cellInfo objectForKey:@"label"];
+    NSString *field = [cellInfo objectForKey:@"field"];
+    [cell useField:field ofManagedObject:self.detailItem];
+	cell.textLabel.text = label;
+    //    cell.textField.text = sample;
+    //    cell.textField.keyboardType = type;
+	return cell;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView selectOneCellWithInfo:(NSDictionary *)cellInfo indexPath:(NSIndexPath *)indexPath
+{
+    NSString *CellIdentifier = [NSString stringWithFormat: @"Cell-%i-%i", indexPath.section, indexPath.row];
+    
+    NSString *label = [cellInfo objectForKey:@"label"];
+    NSString *sample = [cellInfo objectForKey:@"sample"];
+    
+	SelectOneCell *cell = (SelectOneCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[[SelectOneCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+	cell.textLabel.text = label;
+	cell.detailTextLabel.text = sample;
+    cell.detailViewController = self;
+	return cell;
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (self.detailItem) {
+        return [[self.app.uiInfo objectForKey:@"sections"] count];
+    }
+    return 0;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [[[[self.app.uiInfo objectForKey:@"sections"] objectAtIndex:section] objectForKey:@"cells"] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [[[self.app.uiInfo objectForKey:@"sections"] objectAtIndex:section] objectForKey:@"label"];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	UITableViewCell *cell = nil;
+    NSDictionary *sectionInfo = [[self.app.uiInfo objectForKey:@"sections"] objectAtIndex:indexPath.section]; 
+    NSDictionary *cellInfo = [[sectionInfo objectForKey:@"cells"] objectAtIndex:indexPath.row];
+    
+    NSString *type = [cellInfo objectForKey:@"type"];
+    
+    if ([type isEqual:@"text"]) {
+        cell = [self tableView:tableView editingCellWithInfo:cellInfo indexPath:indexPath];
+    } else if ([type isEqual:@"dictionary"]) {
+        cell = [self tableView:tableView selectOneCellWithInfo:cellInfo indexPath:indexPath];
+    } else if ([type isEqual:@"plain"]) {
+        cell = [self tableView:tableView plainCellWithInfo:cellInfo indexPath:indexPath];
+    } else {
+        NSLog(@"cell type '%@' is unknown!", type);
+    }
+    
+    return cell;
+}
+
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    UITableViewCell *nextCell = [tableView cellForRowAtIndexPath:indexPath];
+    if (![nextCell isEdit]) {
+        UITableViewCell *prevCell = [tableView cellForRowAtIndexPath:self.prevCellIndex];
+        self.prevCellIndex = indexPath;
+        [prevCell endEdit];
+        [nextCell startEdit];
+    }
 }
 
 @end

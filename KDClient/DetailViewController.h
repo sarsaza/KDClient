@@ -13,7 +13,7 @@
 @class RootViewController;
 @class DetailTableViewController;
 
-@interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
+@interface DetailViewController : UITableViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
 
 }
 
@@ -24,9 +24,9 @@
 
 @property (nonatomic, assign) IBOutlet RootViewController *rootViewController;
 
-@property (nonatomic, retain) IBOutlet UIBarItem *outboxBarItem;
-@property (nonatomic, retain) IBOutlet UIBarItem *draftsBarItem;
-@property (nonatomic, retain) IBOutlet UIBarItem *trashBarItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *outboxBarItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *draftsBarItem;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *trashBarItem;
 
 @property (nonatomic, retain) IBOutlet DetailTableViewController *tableViewController;
 

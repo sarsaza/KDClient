@@ -17,7 +17,6 @@
 		BB2FBB6D13464E45001B33CA /* KDClient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BB2FBB6B13464E45001B33CA /* KDClient.xcdatamodeld */; };
 		BB2FBB7013464E45001B33CA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB2FBB6E13464E45001B33CA /* MainWindow.xib */; };
 		BB2FBB7313464E45001B33CA /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2FBB7213464E45001B33CA /* DetailViewController.m */; };
-		BB2FBB7613464E45001B33CA /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB2FBB7413464E45001B33CA /* DetailView.xib */; };
 		BB2FBB7913464E46001B33CA /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2FBB7813464E46001B33CA /* RootViewController.m */; };
 		BB2FBB8013464E46001B33CA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2FBB5713464E45001B33CA /* UIKit.framework */; };
 		BB2FBB8113464E46001B33CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB2FBB5913464E45001B33CA /* Foundation.framework */; };
@@ -48,9 +47,9 @@
 		BB2FBBE5134712EF001B33CA /* BoxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB2FBBE4134712EF001B33CA /* BoxViewController.m */; };
 		BB6CDE7C13473B5500E6DEC4 /* ui.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB6CDE7B13473B5500E6DEC4 /* ui.plist */; };
 		BB6CDE801347404000E6DEC4 /* BoxView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB6CDE7F1347404000E6DEC4 /* BoxView.xib */; };
-		BB6CDE831347485E00E6DEC4 /* DetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6CDE821347485E00E6DEC4 /* DetailTableViewController.m */; };
 		BB6CDE871347546200E6DEC4 /* EditingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6CDE861347546200E6DEC4 /* EditingCell.m */; };
 		BB6CDE8A1347547000E6DEC4 /* SelectOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BB6CDE891347547000E6DEC4 /* SelectOneCell.m */; };
+		BB6CDE8C1347628600E6DEC4 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = BB6CDE8B1347628600E6DEC4 /* Icon-72.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,7 +78,6 @@
 		BB2FBB6F13464E45001B33CA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		BB2FBB7113464E45001B33CA /* DetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		BB2FBB7213464E45001B33CA /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		BB2FBB7513464E45001B33CA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailView.xib; sourceTree = "<group>"; };
 		BB2FBB7713464E45001B33CA /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		BB2FBB7813464E46001B33CA /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		BB2FBB7F13464E46001B33CA /* KDClientTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KDClientTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,12 +128,11 @@
 		BB2FBBE4134712EF001B33CA /* BoxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoxViewController.m; sourceTree = "<group>"; };
 		BB6CDE7B13473B5500E6DEC4 /* ui.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ui.plist; sourceTree = "<group>"; };
 		BB6CDE7F1347404000E6DEC4 /* BoxView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BoxView.xib; sourceTree = "<group>"; };
-		BB6CDE811347485D00E6DEC4 /* DetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailTableViewController.h; sourceTree = "<group>"; };
-		BB6CDE821347485E00E6DEC4 /* DetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailTableViewController.m; sourceTree = "<group>"; };
-		BB6CDE851347546200E6DEC4 /* EditingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = EditingCell.h; sourceTree = "<group>"; };
+		BB6CDE851347546200E6DEC4 /* EditingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditingCell.h; sourceTree = "<group>"; };
 		BB6CDE861347546200E6DEC4 /* EditingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditingCell.m; sourceTree = "<group>"; };
 		BB6CDE881347547000E6DEC4 /* SelectOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectOneCell.h; sourceTree = "<group>"; };
 		BB6CDE891347547000E6DEC4 /* SelectOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectOneCell.m; sourceTree = "<group>"; };
+		BB6CDE8B1347628600E6DEC4 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				BB2FBB6113464E45001B33CA /* KDClient-Info.plist */,
+				BB6CDE8B1347628600E6DEC4 /* Icon-72.png */,
 				BB2FBB6213464E45001B33CA /* InfoPlist.strings */,
 				BB2FBB6513464E45001B33CA /* KDClient-Prefix.pch */,
 				BB2FBB6613464E45001B33CA /* main.m */,
@@ -311,8 +309,6 @@
 				BB2FBBE4134712EF001B33CA /* BoxViewController.m */,
 				BB2FBB7113464E45001B33CA /* DetailViewController.h */,
 				BB2FBB7213464E45001B33CA /* DetailViewController.m */,
-				BB6CDE811347485D00E6DEC4 /* DetailTableViewController.h */,
-				BB6CDE821347485E00E6DEC4 /* DetailTableViewController.m */,
 				BB2FBB7713464E45001B33CA /* RootViewController.h */,
 				BB2FBB7813464E46001B33CA /* RootViewController.m */,
 				BB2FBBCB13464FFD001B33CA /* SelectOneController.h */,
@@ -324,7 +320,6 @@
 		BB6CDE7E1347400700E6DEC4 /* UserInterface */ = {
 			isa = PBXGroup;
 			children = (
-				BB2FBB7413464E45001B33CA /* DetailView.xib */,
 				BB2FBB6E13464E45001B33CA /* MainWindow.xib */,
 				BB6CDE7F1347404000E6DEC4 /* BoxView.xib */,
 			);
@@ -414,9 +409,9 @@
 			files = (
 				BB2FBB6413464E45001B33CA /* InfoPlist.strings in Resources */,
 				BB2FBB7013464E45001B33CA /* MainWindow.xib in Resources */,
-				BB2FBB7613464E45001B33CA /* DetailView.xib in Resources */,
 				BB6CDE7C13473B5500E6DEC4 /* ui.plist in Resources */,
 				BB6CDE801347404000E6DEC4 /* BoxView.xib in Resources */,
+				BB6CDE8C1347628600E6DEC4 /* Icon-72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -473,7 +468,6 @@
 				BB2FBBCD13464FFD001B33CA /* SelectOneController.m in Sources */,
 				BB2FBBE2134712A1001B33CA /* ReportPostRequest.m in Sources */,
 				BB2FBBE5134712EF001B33CA /* BoxViewController.m in Sources */,
-				BB6CDE831347485E00E6DEC4 /* DetailTableViewController.m in Sources */,
 				BB6CDE871347546200E6DEC4 /* EditingCell.m in Sources */,
 				BB6CDE8A1347547000E6DEC4 /* SelectOneCell.m in Sources */,
 			);
@@ -512,14 +506,6 @@
 				BB2FBB6F13464E45001B33CA /* en */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		BB2FBB7413464E45001B33CA /* DetailView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BB2FBB7513464E45001B33CA /* en */,
-			);
-			name = DetailView.xib;
 			sourceTree = "<group>";
 		};
 		BB2FBB8913464E46001B33CA /* InfoPlist.strings */ = {

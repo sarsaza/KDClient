@@ -99,6 +99,11 @@
     return [self.app.boxes count];
 }
 
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    cell.textLabel.text = [[self.app.boxes objectAtIndex:indexPath.row] valueForKey:@"label"];
+    //cell.imageView.image = [UIImage i
+}
 		
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -148,11 +153,6 @@
 {
     // The table view should not be re-orderable.
     return NO;
-}
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    cell.textLabel.text = [[self.app.boxes objectAtIndex:indexPath.row] valueForKey:@"label"];
 }
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
